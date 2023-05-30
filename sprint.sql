@@ -11,36 +11,39 @@ USE telovento_pedidos;
 
 -- Crea tabla usuario
 CREATE TABLE usuario (
-    id_usuario INT UNSIGNED NOT NULL AUTO_INCREMENT PRIMARY KEY,
+    id_usuario INT UNSIGNED NOT NULL AUTO_INCREMENT,
     nombre VARCHAR(20) NOT NULL,
     apellido VARCHAR(20) NOT NULL,
     edad INT NOT NULL,
     correo_electronico VARCHAR(45) NOT NULL,
     cantidad_usos INT NOT NULL DEFAULT 1,
+    PRIMARY KEY (id_usuario),
     UNIQUE INDEX correo_electronico_UNIQUE (correo_electronico ASC) VISIBLE,
     UNIQUE INDEX id_usuario_UNIQUE (id_usuario ASC) VISIBLE);
 
 
 -- Crea tabla operario
 CREATE TABLE operario (
-    id_operario INT UNSIGNED NOT NULL AUTO_INCREMENT PRIMARY KEY,
+    id_operario INT UNSIGNED NOT NULL AUTO_INCREMENT,
     nombre VARCHAR(45) NOT NULL,
     apellido VARCHAR(45) NOT NULL,
     edad INT NOT NULL,
     correo_electronico VARCHAR(45) NOT NULL,
     veces_soporte INT NOT NULL DEFAULT 1,
+    PRIMARY KEY (id_operario),
     UNIQUE INDEX id_operario_UNIQUE (id_operario ASC) VISIBLE,
     UNIQUE INDEX correo_electronico_UNIQUE (correo_electronico ASC) VISIBLE);
 
 
 -- Crea tabla soporte
 CREATE TABLE soporte (
-    id_soporte INT NOT NULL AUTO_INCREMENT PRIMARY KEY,
+    id_soporte INT NOT NULL AUTO_INCREMENT,
     id_usuario INT UNSIGNED NOT NULL,
     id_operario INT UNSIGNED NOT NULL,
     fecha DATE NOT NULL,
     evaluacion TINYINT(1) NOT NULL,
     comentario TINYTEXT NULL,
+    PRIMARY KEY (id_soporte),
     INDEX fk_soporte_usuario_idx (id_usuario ASC) VISIBLE,
     INDEX fk_soporte_operario1_idx (id_operario ASC) VISIBLE,
     CONSTRAINT fk_soporte_usuario
